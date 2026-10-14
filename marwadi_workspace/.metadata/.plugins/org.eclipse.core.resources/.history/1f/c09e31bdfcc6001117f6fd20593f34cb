@@ -1,0 +1,15 @@
+package com.demo;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class StudentService {
+
+    public void addStudent() {
+        System.out.println("Student added successfully.");
+    }
+
+    public void deleteStudent() {
+        System.out.println("Student deleted successfully.");
+    }
+}

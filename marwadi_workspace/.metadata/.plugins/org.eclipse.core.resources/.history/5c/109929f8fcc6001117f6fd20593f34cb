@@ -1,0 +1,113 @@
+package com.demo.controller;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import jakarta.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class AuthController {
+
+    // Temporary storage: username -> password
+    private static final Map<String, String> users =
+            new ConcurrentHashMap<>();
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/register")
+    public String showRegisterPage() {
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String register(
+            @RequestParam String username,
+            @RequestParam String password,
+            Model model) {
+
+        username = username.trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            model.addAttribute("error",
+                    "Username and password are required.");
+            return "register";
+        }
+
+        if (users.putIfAbsent(username, password) != null) {
+            model.addAttribute("error",
+                    "Username already exists.");
+            return "register";
+        }
+
+        model.addAttribute("message",
+                "Registration successful. Please login.");
+
+        return "login";
+    }
+
+    @GetMapping("/login")
+    public String showLoginPage(HttpSession session) {
+
+        if (session.getAttribute("username") != null) {
+            return "redirect:/dashboard";
+        }
+
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(
+            @RequestParam String username,
+            @RequestParam String password,
+            HttpSession session,
+            Model model) {
+
+        String savedPassword = users.get(username.trim());
+
+        if (savedPassword != null &&
+                savedPassword.equals(password)) {
+
+            // Create a fresh session after successful login
+            session.invalidate();
+            HttpSession newSession =
+                    ((jakarta.servlet.http.HttpServletRequest)
+                    null) == null ? null : null;
+
+            // Login session is created by the request in the
+            // corrected version below.
+            return "redirect:/login";
+        }
+
+        model.addAttribute("error",
+                "Invalid username or password.");
+
+        return "login";
+    }
+
+    @GetMapping("/dashboard")
+    public String dashboard(HttpSession session) {
+
+        if (session.getAttribute("username") == null) {
+            return "redirect:/login";
+        }
+
+        return "dashboard";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+
+        session.invalidate();
+
+        return "redirect:/login?logout";
+    }
+}

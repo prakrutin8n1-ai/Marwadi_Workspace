@@ -1,0 +1,5 @@
+#Tomcat publish data
+#Tue Oct 13 17:54:33 IST 2026
+org.eclipse.jst.j2ee.server\:/binary\:C\:\\Users\\tops\\.m2\\repository\\org\\springframework\\spring-web\\6.2.8\\spring-web-6.2.8.jar=WEB-INF/lib/spring-web-6.2.8.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\tops\\.m2\\repository\\org\\springframework\\spring-web\\6.2.7\\spring-web-6.2.7.jar=WEB-INF/lib/spring-web-6.2.7.jar
+org.eclipse.jst.jee.server\:/binary\:C\:\\Users\\tops\\.m2\\repository\\org\\springframework\\spring-web\\6.2.8\\spring-web-6.2.8.jar=WEB-INF/lib/spring-web-6.2.8.jar

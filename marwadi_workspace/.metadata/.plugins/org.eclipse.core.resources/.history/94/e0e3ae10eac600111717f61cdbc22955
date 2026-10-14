@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Welcome</title>
+</head>
+<body>
+
+    <h2>Student Welcome Application</h2>
+
+    <form action="${pageContext.request.contextPath}/welcome"
+          method="post">
+
+        Enter Your Name:
+        <input type="text" name="name" required>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+</body>
+</html>

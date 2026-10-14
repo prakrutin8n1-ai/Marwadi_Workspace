@@ -1,0 +1,22 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Student JDBC MVC</title>
+
+    <meta http-equiv="refresh"
+          content="0;url=${pageContext.request.contextPath}/">
+</head>
+<body>
+    <h2>Student Registration System</h2>
+    <p>Redirecting to registration form...</p>
+
+    <a href="${pageContext.request.contextPath}/">
+        Open Student Registration
+    </a>
+</body>
+</html>

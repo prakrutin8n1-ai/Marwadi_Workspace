@@ -1,0 +1,16 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+
+    <h2>Welcome, ${studentName}!</h2>
+
+    <a href="${pageContext.request.contextPath}/">
+        Go Back
+    </a>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>${pageTitle}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 35px; color: #222; }
+        form { max-width: 450px; }
+        label { display: block; margin-top: 15px; }
+        input { width: 100%; box-sizing: border-box; padding: 9px; margin-top: 5px; }
+        button { margin-top: 20px; padding: 10px 15px; background: #1769aa; color: white; border: 0; border-radius: 4px; cursor: pointer; }
+        a { margin-left: 12px; }
+    </style>
+</head>
+<body>
+    <h1>${pageTitle}</h1>
+    <form action="${pageContext.request.contextPath}/student/save" method="post">
+        <input type="hidden" name="id" value="${student.id}" />
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" value="${student.name}" maxlength="100" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" value="${student.email}" maxlength="150" required />
+
+        <label for="course">Course</label>
+        <input type="text" id="course" name="course" value="${student.course}" maxlength="100" required />
+
+        <button type="submit">Save Student</button>
+        <a href="${pageContext.request.contextPath}/">Cancel</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+package com.student.controller;
+
+import com.student.model.Student;
+import com.student.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+@Controller
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/students";
+    }
+
+    @GetMapping("/students")
+    public String listStudents(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "students";
+    }
+}

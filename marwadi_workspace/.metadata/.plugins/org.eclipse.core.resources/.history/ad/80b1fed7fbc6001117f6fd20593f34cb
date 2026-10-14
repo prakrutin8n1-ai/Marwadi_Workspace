@@ -1,0 +1,81 @@
+
+package com.student.controller;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.student.dao.StudentDAO;
+import com.student.model.Student;
+
+@Controller
+public class StudentController {
+
+    private final StudentDAO studentDAO;
+
+    public StudentController(StudentDAO studentDAO) {
+        this.studentDAO = studentDAO;
+    }
+
+    // Open index page URL and show registration form
+    @GetMapping("/")
+    public String home(Model model) {
+        model.addAttribute("student", new Student());
+        return "student-form";
+    }
+
+    // Open registration form using /register
+    @GetMapping("/register")
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("student", new Student());
+        return "student-form";
+    }
+
+    // Save student into MySQL database
+    @PostMapping("/save")
+    public String saveStudent(
+            @ModelAttribute("student") Student student,
+            Model model) {
+
+        try {
+            studentDAO.saveStudent(student);
+            return "redirect:/students";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            model.addAttribute("error",
+                    "Unable to save student. Check MySQL connection.");
+
+            return "student-form";
+        }
+    }
+
+    // Display all students
+    @GetMapping("/students")
+    public String listStudents(Model model) {
+
+        try {
+            List<Student> students = studentDAO.getAllStudents();
+
+            model.addAttribute("students", students);
+
+            return "student-list";
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+            model.addAttribute("error",
+                    "Unable to load students. Check MySQL connection.");
+
+            model.addAttribute("students", List.of());
+
+            return "student-list";
+        }
+    }
+}

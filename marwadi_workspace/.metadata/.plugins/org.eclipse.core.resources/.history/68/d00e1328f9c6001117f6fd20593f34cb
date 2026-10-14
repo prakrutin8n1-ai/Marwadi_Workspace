@@ -1,0 +1,78 @@
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f2f5f9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background: #1769aa;
+            color: white;
+        }
+
+        a {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Registered Students</h2>
+
+    <p class="error">${error}</p>
+
+    <a href="${pageContext.request.contextPath}/">
+        Add New Student
+    </a>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Course</th>
+        </tr>
+
+        <c:forEach var="s" items="${students}">
+            <tr>
+                <td><c:out value="${s.id}"/></td>
+                <td><c:out value="${s.name}"/></td>
+                <td><c:out value="${s.email}"/></td>
+                <td><c:out value="${s.course}"/></td>
+            </tr>
+        </c:forEach>
+
+        <c:if test="${empty students}">
+            <tr>
+                <td colspan="4">No students found.</td>
+            </tr>
+        </c:if>
+    </table>
+
+</body>
+</html>

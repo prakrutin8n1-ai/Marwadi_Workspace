@@ -1,0 +1,65 @@
+```html
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Spring MVC Demo</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f4f8;
+            margin: 0;
+            padding: 50px;
+        }
+
+        .container {
+            width: 350px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #1769aa;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Student Registration</h2>
+
+        <form action="${pageContext.request.contextPath}/submit"
+              method="post">
+
+            <label>Student Name</label>
+            <input type="text" name="name" required>
+
+            <label>Email Address</label>
+            <input type="email" name="email" required>
+
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+</body>
+</html>
+```

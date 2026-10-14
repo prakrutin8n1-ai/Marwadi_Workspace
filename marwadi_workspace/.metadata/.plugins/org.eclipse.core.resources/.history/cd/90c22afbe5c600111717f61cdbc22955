@@ -1,0 +1,57 @@
+package com.student.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.student.model.Student;
+import com.student.service.StudentService;
+
+@Controller
+public class StudentController {
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+    @GetMapping({"/", "/students"})
+    public String home(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "students";
+    }
+
+    @GetMapping("/student/add")
+    public String addForm(Model model) {
+        model.addAttribute("student", new Student());
+        model.addAttribute("pageTitle", "Add Student");
+        return "student-form";
+    }
+
+    @PostMapping("/student/save")
+    public String saveStudent(@ModelAttribute("student") Student student) {
+        studentService.saveStudent(student);
+        return "redirect:/";
+    }
+
+    @GetMapping("/student/edit/{id}")
+    public String editStudent(@PathVariable int id, Model model) {
+        Student student = studentService.getStudentById(id);
+        if (student == null) {
+            return "redirect:/";
+        }
+        model.addAttribute("student", student);
+        model.addAttribute("pageTitle", "Edit Student");
+        return "student-form";
+    }
+
+    @GetMapping("/student/delete/{id}")
+    public String deleteStudent(@PathVariable int id) {
+        studentService.deleteStudent(id);
+        return "redirect:/";
+    }
+}

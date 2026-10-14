@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spring MVC Demo</title>
+</head>
+<body>
+
+    <h2>Simple Spring MVC Application</h2>
+
+    <form action="${pageContext.request.contextPath}/welcome"
+          method="post">
+
+        <label>Enter Your Name:</label>
+        <input type="text" name="name" required>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+</body>
+</html>
