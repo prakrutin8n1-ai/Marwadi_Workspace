@@ -1,0 +1,81 @@
+package com.student.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.student.model.Student;
+import com.student.service.StudentService;
+
+@Controller
+public class StudentController {
+
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
+
+//    // Display all students
+//    @GetMapping({"/", "/students"})
+//    public String home(Model model) {
+//        model.addAttribute("students", studentService.getAllStudents());
+//        return "students";
+//    }
+    
+    @GetMapping("/")
+    public String home() {
+        return "redirect:/student/add";
+    }
+
+    @GetMapping("/students")
+    public String showStudents(Model model) {
+        model.addAttribute("students", studentService.getAllStudents());
+        return "students";
+    }
+
+    // Open add form
+    @GetMapping("/student/add")
+    public String addForm(Model model) {
+        model.addAttribute("student", new Student());
+        model.addAttribute("pageTitle", "Add Student");
+        return "student-form";
+    }
+
+    // Save new student or update existing student
+    @PostMapping("/student/save")
+    public String saveStudent(
+            @ModelAttribute("student") Student student) {
+
+        studentService.saveStudent(student);
+        return "redirect:/students";
+    }
+
+    // Open edit form with existing details
+    @GetMapping("/student/edit/{id}")
+    public String editStudent(
+            @PathVariable("id") int id, Model model) {
+
+        Student student = studentService.getStudentById(id);
+
+        if (student == null) {
+            return "redirect:/students";
+        }
+
+        model.addAttribute("student", student);
+        model.addAttribute("pageTitle", "Edit Student");
+
+        return "student-form";
+    }
+
+    // Delete student
+    @GetMapping("/student/delete/{id}")
+    public String deleteStudent(@PathVariable("id") int id) {
+
+        studentService.deleteStudent(id);
+        return "redirect:/students";
+    }
+}
