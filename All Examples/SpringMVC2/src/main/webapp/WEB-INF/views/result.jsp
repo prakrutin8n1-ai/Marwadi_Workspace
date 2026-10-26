@@ -1,0 +1,54 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Successful</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f4f8;
+            padding: 50px;
+        }
+
+        .container {
+            width: 400px;
+            margin: auto;
+            padding: 25px;
+            background: white;
+            border-radius: 10px;
+        }
+
+        a {
+            color: #1769aa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Registration Successful</h2>
+
+        <p>
+            <strong>Student Name:</strong>
+            <%= org.springframework.web.util.HtmlUtils.htmlEscape(
+                    (String) request.getAttribute("studentName")) %>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            <%= org.springframework.web.util.HtmlUtils.htmlEscape(
+                    (String) request.getAttribute("studentEmail")) %>
+        </p>
+
+        <a href="${pageContext.request.contextPath}/home">
+            Register Another Student
+        </a>
+    </div>
+
+</body>
+</html>

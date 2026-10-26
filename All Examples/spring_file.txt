@@ -1,0 +1,146 @@
+loosely coupled: koi bhi vastu nu strucutre evu nai banavvvanu ke problem thay module easily add,remove thai skae evu banvavanau  
+
+dependency injection:
+
+class ramu
+{
+	geeta ob;
+	public void dowork()
+	{
+		
+	}
+}
+
+ramu geeta par depend kre chhe geeta pan class chhe e potanu pan kam kre ramu nu pan kam kare
+
+geeta no object aapo to j ramu kam kri sakse
+e obj aapso to j kam thase security improve krva mate 
+new keyword thi object nai banavvano e kro to aap tightly coupled thai jay aapde loosely coupled banavvani chhhe
+
+dependency injection use kru spring pase e capability chhe ke bija class na object cretae kri ne bija class sathe automatic inject kri sake
+aa spring kri sake
+
+
+Injection -> medicine inject kri daie koi person ni andar [spring doctor nu kam krse inject kri de p6i dava automatic enu kam kare]
+
+it's a small example
+
+aa puri process ne j IOC kevay inversion of control object creation no control me spring ne aapi didho means hve e jate bdhu control kri sakse spring
+
+
+annotation and xml banne thi thay ioc etle object creation no control spring ne aapi devo 
+
+
+UI
+
+Business Layer
+
+Data Access Layer
+
+DB
+
+
+Spring Lifecycle:
+
+init
+destroy
+
+Spring AOP:
+## Spring AOP શું છે?
+
+Spring AOP (Aspect-Oriented Programming) એ Spring Framework ની એક technique છે, જેનો ઉપયોગ application માં common functionality ને અલગ રાખવા માટે થાય છે.
+
+સરળ ભાષામાં કહીએ તો, તમારા application માં ઘણી methods માટે એકસરખું કામ કરવાનું હોય, જેમ કે logging, security, transaction management અને performance checking, તો એ code દરેક method માં લખવાને બદલે Spring AOP નો ઉપયોગ કરી શકાય છે.
+
+### 1. Real-life Example
+
+ધારો કે તમારી પાસે આ ત્રણ methods છે:
+
+- `saveUser()`
+- `deleteUser()`
+- `updateUser()`
+
+તમારે દરેક method ક્યારે execute થાય છે તે log કરવું છે.
+
+AOP વગર દરેક method માં logging code લખવો પડે:
+
+java
+```
+public void saveUser() {
+    System.out.println("Method started");
+    // save user logic
+}
+
+public void deleteUser() {
+    System.out.println("Method started");
+    // delete user logic
+}
+```
+
+AOP સાથે તમે logging logic એક જ જગ્યાએ લખી શકો છો અને તેને જરૂરી methods પર apply કરી શકો છો.
+
+### 2. Spring AOP નો Example
+
+java
+```
+@Aspect
+@Component
+public class LoggingAspect {
+
+    @Before("execution(* com.example.service.*.*(..))")
+    public void logBefore() {
+        System.out.println("Method started");
+    }
+}
+```
+
+આ code શું કરે છે?
+
+- `@Aspect` — આ class માં AOP logic છે તે દર્શાવે છે.
+- `@Component` — Spring આ class નો object બનાવે છે.
+- `@Before` — method execute થાય તે પહેલાં `logBefore()` execute થશે.
+- `execution(...)` — કઈ methods પર AOP લાગુ કરવું તે નક્કી કરે છે.
+
+ઉદાહરણ તરીકે, `com.example.service` package ની methods call થશે ત્યારે logging થઈ શકે છે.
+
+### 3. Spring AOP ના મુખ્ય Terms
+
+| Term | અર્થ |
+| --- | --- |
+| Aspect | Common functionality નો code, જેમ કે logging |
+| Advice | ક્યારે code execute કરવો, જેમ કે પહેલાં કે પછી |
+| Join Point | Execution નો એવો point જ્યાં advice લાગુ થઈ શકે |
+| Pointcut | કઈ methods પર advice લાગુ કરવો તેની expression |
+| Weaving | Aspect ને target code સાથે જોડવાની પ્રક્રિયા |
+| Proxy | Target object ની method calls ને intercept કરતું object |
+
+### 4. Advice ના પ્રકાર
+
+- `@Before` — method પહેલાં execute થાય.
+- `@After` — method પૂરી થયા પછી execute થાય.
+- `@AfterReturning` — method સફળતાપૂર્વક return કરે પછી execute થાય.
+- `@AfterThrowing` — method માં exception આવે ત્યારે execute થાય.
+- `@Around` — method પહેલાં અને પછી બંને સમયે control આપે છે.
+
+### 5. Spring AOP ક્યાં ઉપયોગી છે?
+
+- Logging: કઈ method call થઈ તે જાણવા.
+- Security: method execute કરતાં પહેલાં permission check કરવા.
+- Transaction Management: database transaction manage કરવા.
+- Performance Monitoring: method કેટલો સમય લે છે તે માપવા.
+
+### 6. Spring AOP અને OOP વચ્ચે તફાવત
+
+- OOP: Application ને classes અને objects માં organize કરે છે.
+- AOP: Logging અને security જેવી cross-cutting concerns ને business logic થી અલગ રાખે છે.
+
+યાદ રાખો: Spring AOP સામાન્ય રીતે runtime proxies દ્વારા method calls intercept કરે છે. તેથી self-invocation (એક જ class ની અંદરથી પોતાની બીજી method call કરવી) જેવી પરિસ્થિતિઓમાં AOP લાગુ ન પણ પડે.
+
+તમારે Spring AOP સમજવા માટે આગળ કયું શીખવું છે?
+
+- `@Before`, `@After` અને `@Around` નો practical example
+- `Pointcut` અને `JoinPoint` વચ્ચેનો તફાવત
+- Spring AOP ના interview questions અને answers
+
+
+MC structure
